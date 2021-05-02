@@ -65,7 +65,7 @@ class Record {
     this.ifInvalidArgs(args, (invalidArgs) => { throw new Error(`${invalidArgs} is invalid args`); })
 
     const column = this.config().column;
-    const row = column.map(column => args[column]);
+    const row = column.map(c => args[c]);
     const result = this.table().appendRow(row);
 
     return result;
@@ -75,7 +75,7 @@ class Record {
     this.constructor.ifInvalidArgs(args, (invalidArgs) => { throw new Error(`${invalidArgs} is invalid args`); })
 
     const column = this.constructor.config().column;
-    const row = column.map(column => args[column] || this[column]);
+    const row = column.map(c => args[c] || this[c]);
     const result = this.constructor.table().getRange(this.index, 1, 1, column.length).setValues([row]);
 
     return result;
